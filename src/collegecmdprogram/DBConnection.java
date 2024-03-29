@@ -45,5 +45,27 @@ public class DBConnection {
         return coursesList;
 
     }
+            public ArrayList<Student> getStudentArray() throws SQLException {
+
+        ArrayList<Student> studentsList;
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
+            PreparedStatement PreparedStatement = conn.prepareStatement("SELECT * FROM Students ");
+            PreparedStatement.execute("USE CourseManagementSystem;");
+            ResultSet rs = PreparedStatement.executeQuery();
+            studentsList = new ArrayList<>();
+            while (rs.next()) {
+
+                String studentId = rs.getString("student_id");
+                String name = rs.getString("student_name");
+                String studentProgramme = rs.getString("programme");
+                String studentStatus = rs.getString("student_status");
+                int studentGrade = rs.getInt("grade");
+                studentsList.add(new Student(studentId, name, studentProgramme, studentStatus, studentGrade));
+
+            }
+        }
+        return studentsList;
+
+    }
     
 }
