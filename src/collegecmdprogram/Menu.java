@@ -74,6 +74,12 @@ public class Menu {
                     user.removeUser(removeUser);
                     break;
                 case 4:
+                    System.out.println(" Change Admin Username");
+                    String changeUsername = sc.nextLine();
+                    System.out.println("Change Admin Password");
+                    String changePassword = sc.nextLine();
+                    user.changeUsernamePassword(changeUsername, changePassword);
+                    break;
                 case 5:
                 case 6:
             }
