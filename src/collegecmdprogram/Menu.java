@@ -4,10 +4,32 @@
  */
 package collegecmdprogram;
 
+
+import java.util.Scanner;
+
 /**
  *
  * @author hussa
  */
 public class Menu {
     
+    Scanner sc= new Scanner(System.in);
+        public void display() {
+        int option;
+        while (true) {
+            System.out.println("Admin Login");
+            System.out.println("Enter User Name");
+            String adminUsernameInput = sc.nextLine();
+            System.out.println("Enter Password");
+            String adminPasswordInput = sc.nextLine();
+
+            if (adminUsernameInput.equals("admin") && adminPasswordInput.equals("java")) {
+
+              
+            } else {
+                System.out.println(" incorrect login");
+            }
+        }
+
+    }
 }
