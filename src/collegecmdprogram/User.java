@@ -63,4 +63,29 @@ public class User {
         this.users.add(new User(username, password, role));
         System.out.println("User " + username + " with role " + role + " created.");
     }
+
+    public void modifyUser(String oldUsername, String newUsername, String newPassword, UserRole newUserRole) {
+        if (this.role != UserRole.ADMIN) {
+            System.out.println("Only ADMIN user can modify users");
+            return;
+        }
+
+        if (users.isEmpty()) {
+            System.out.println("There are no users on the system for the moment.");
+            return;
+        }
+
+        for (User user : this.users) {
+            if (user.username.equals(oldUsername)) {
+                user.username = newUsername;
+                user.password = newPassword;
+                user.role = newUserRole;
+                System.out.println("User " + oldUsername + " modified");
+                return;
+            }
+        }
+
+        System.out.println("No user with " + oldUsername + " username found.");
+    }
+
 }
