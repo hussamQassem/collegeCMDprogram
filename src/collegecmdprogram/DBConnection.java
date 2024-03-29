@@ -67,5 +67,28 @@ public class DBConnection {
         return studentsList;
 
     }
-    
+      public ArrayList<Lecturers> getLecturerArray() throws SQLException {
+
+        ArrayList<Lecturers> lectureList;
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
+            PreparedStatement PreparedStatement = conn.prepareStatement("SELECT * FROM Lecturers ");
+            PreparedStatement.execute("USE CourseManagementSystem;");
+            ResultSet rs = PreparedStatement.executeQuery();
+            lectureList = new ArrayList<>();
+            while (rs.next()) {
+                String lecturerId = rs.getString("lecturer_id");
+                String lectureName = rs.getString("lecturer_name");
+                String lectureRoll = rs.getString("lecturer_role");
+                String moduleInSemester = rs.getString("semester_module");
+                int studentEnrolledNum = rs.getInt("number_of_students_enrolled");
+                String lectureSkills = rs.getString("lecturer_skills");
+                lectureList.add(new Lecturers(lecturerId,lectureName, lectureRoll, moduleInSemester, studentEnrolledNum, lectureSkills));
+
+            }
+        }
+        return lectureList;
+
+    }  
 }
+
+
