@@ -13,13 +13,15 @@ public class Courses {
     private String module;
     private String inprogramm;
     private int studentsNum;
+    private String roomType;
 
-    public Courses(String module, String inprogramm, int studentsNum, String lecturer) {
+    public Courses(String module, String inprogramm, int studentsNum, String lecturer, String roomType) {
         this.module = module;
         this.inprogramm = inprogramm;
         this.studentsNum = studentsNum;
         this.lecturer = lecturer;
     }
+
     private String lecturer;
 
     public String getModule() {
@@ -36,6 +38,10 @@ public class Courses {
 
     public String getLecturer() {
         return lecturer;
+    }
+
+    public String getRoomType() {
+        return roomType;
     }
 
 }
