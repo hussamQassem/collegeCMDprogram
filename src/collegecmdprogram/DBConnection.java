@@ -4,6 +4,13 @@
  */
 package collegecmdprogram;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /**
  *
  * @author hussa
@@ -16,6 +23,27 @@ public class DBConnection {
 
     
     
-    
+        public ArrayList<Courses> getCourseArray() throws SQLException {
+
+        ArrayList<Courses> coursesList;
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
+            PreparedStatement PreparedStatement = conn.prepareStatement("SELECT * FROM courses ");
+            PreparedStatement.execute("USE CourseManagementSystem;");
+            ResultSet rs = PreparedStatement.executeQuery();
+            coursesList = new ArrayList<>();
+            while (rs.next()) {
+
+                String module = rs.getString("module_name");
+                String inprogramm = rs.getString("programme");
+                int studentsNum = rs.getInt("number_of_students_enrolled");
+                String lecturer = rs.getString("lecturer_name");
+                String roomType = rs.getString("room_or_location");
+                coursesList.add(new Courses(module, inprogramm, studentsNum, lecturer, roomType));
+
+            }
+        }
+        return coursesList;
+
+    }
     
 }
