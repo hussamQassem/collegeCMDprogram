@@ -58,6 +58,16 @@ public class Menu {
                     user.addUser(addUsername, addPassword, UserRole.valueOf(addRole.toUpperCase()));
                     break;
                 case 2:
+                    System.out.println("Enter Old Username to modify");
+                    String oldUsername = sc.nextLine();
+                    System.out.println("Enter New Username");
+                    String newUsername = sc.nextLine();
+                    System.out.println("Enter New Password");
+                    String newPassword = sc.nextLine();
+                    System.out.println("Enter New Role");
+                    String newRole = sc.nextLine();
+                    user.modifyUser(oldUsername, newUsername, newPassword, UserRole.valueOf(newRole.toUpperCase()));
+                    break;
                 case 3:
                 case 4:
                 case 5:
