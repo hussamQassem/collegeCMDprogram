@@ -110,5 +110,8 @@ public class User {
 
         System.out.println("No user with " + username + " username found.");
     }
-
+    public void changeUsernamePassword(String newUsername, String newPassword) {
+        this.username = newUsername;
+        this.password = newPassword;
+    }
 }
