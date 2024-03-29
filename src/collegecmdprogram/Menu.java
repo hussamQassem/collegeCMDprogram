@@ -69,8 +69,9 @@ public class Menu {
                     user.modifyUser(oldUsername, newUsername, newPassword, UserRole.valueOf(newRole.toUpperCase()));
                     break;
                 case 3:
-
-                    
+                    System.out.println(" Enter Username to remove");
+                    String removeUser = sc.nextLine();
+                    user.removeUser(removeUser);
                     break;
                 case 4:
                 case 5:
