@@ -87,5 +87,28 @@ public class User {
 
         System.out.println("No user with " + oldUsername + " username found.");
     }
+    
+    
+    public void removeUser(String username) {
+        if (this.role != UserRole.ADMIN) {
+            System.out.println("Only ADMIN user can remove users");
+            return;
+        }
+
+        if (users.isEmpty()) {
+            System.out.println("There are no users on the system for the moment.");
+            return;
+        }
+
+        for (User user : this.users) {
+            if (user.username.equals(username)) {
+                this.users.remove(user);
+                System.out.println(username + " username has been removed.");
+                return;
+            }
+        }
+
+        System.out.println("No user with " + username + " username found.");
+    }
 
 }

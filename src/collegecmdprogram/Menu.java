@@ -69,6 +69,9 @@ public class Menu {
                     user.modifyUser(oldUsername, newUsername, newPassword, UserRole.valueOf(newRole.toUpperCase()));
                     break;
                 case 3:
+
+                    
+                    break;
                 case 4:
                 case 5:
                 case 6:
