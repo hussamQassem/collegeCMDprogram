@@ -14,8 +14,9 @@ import java.util.Scanner;
 public class Menu {
     
     Scanner sc= new Scanner(System.in);
+    int option;
         public void display() {
-        int option;
+        
         while (true) {
             System.out.println("Admin Login");
             System.out.println("Enter User Name");
@@ -24,6 +25,7 @@ public class Menu {
             String adminPasswordInput = sc.nextLine();
 
             if (adminUsernameInput.equals("admin") && adminPasswordInput.equals("java")) {
+                AdminMenu();
 
               
             } else {
@@ -31,5 +33,19 @@ public class Menu {
             }
         }
 
+    }
+        
+   
+    public void AdminMenu()  {
+        System.out.println("Please Choose Option");
+        System.out.println("1- Add User");
+        System.out.println("2- Modify User");
+        System.out.println("3- Remove user");
+        System.out.println("4- Change password");
+        System.out.println("5- Acsses Other Users");
+        System.out.println("6- Exit");
+        option = sc.nextInt();     
+        
+        
     }
 }
