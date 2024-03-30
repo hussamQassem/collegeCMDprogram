@@ -158,5 +158,80 @@ public class Menu {
     }
     
     
+    public void saveTypeTo(int type) throws SQLException {
+        while (true) {
+            System.out.println("1- Save To TXT File");
+            System.out.println("2- Save To CSV File");
+            System.out.println("3- Display On Console");
+            System.out.println("4- Exit");
+
+            int fileOption = sc.nextInt();
+            if (type == 1) {
+                switch (fileOption) {
+                    case 1:
+                        loggedUser.generateCourseReport(OutputType.TXT);
+                        System.out.println("TXT File Saved");
+                        break;
+                    case 2:
+                        loggedUser.generateCourseReport(OutputType.CSV);
+                        System.out.println("CSV File Saved");
+                        break;
+                    case 3:
+                        
+                        System.out.println("Dispaly On Console");
+                        break;
+                    case 4:
+                        System.out.println("Exit");
+                        return;
+                    default:
+                        System.out.println("Please Enter Valid Option");
+                        break;
+                }
+            } else if (type == 2) {
+                switch (fileOption) {
+                    case 1:
+                        loggedUser.generateStudentReport(OutputType.TXT);
+                        System.out.println("TXT File Saved");
+                        break;
+                    case 2:
+                        loggedUser.generateStudentReport(OutputType.CSV);
+                        System.out.println("CSV File Saved");
+                        break;
+                    case 3:
+                        
+                        System.out.println("Dispaly On Console");
+                        break;
+                    case 4:
+                        System.out.println("Exit");
+                        return;
+                    default:
+                        System.out.println("Please Enter Valid Option");
+                        break;
+                }
+            } else if (type == 3) {
+                switch (fileOption) {
+                    case 1:
+                        loggedUser.generateLecturerReport(OutputType.TXT);
+                        System.out.println("TXT File Saved");
+                        break;
+                    case 2:
+                        loggedUser.generateLecturerReport(OutputType.CSV);
+                        System.out.println("CSV File Saved");
+                        break;
+                    case 3:
+                        
+                        System.out.println("Dispaly On Console");
+                        break;
+                    case 4:
+                        System.out.println("Exit");
+                        return;
+                    default:
+                        System.out.println("Please Enter Valid Option");
+                        break;
+                }
+            }
+
+        }
+    }
     
 }
