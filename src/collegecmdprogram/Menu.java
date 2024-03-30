@@ -115,4 +115,48 @@ public class Menu {
         }
 
     }
+        public void officeMenu() throws SQLException {
+        while (true) {
+            System.out.println("1- Generate Courses Report");
+            System.out.println("2- Generate Student Report");
+            System.out.println("3- Generate Lecturer Report");
+            System.out.println("4- Change Username And Password");
+            System.out.println("5- Exit");
+            option = sc.nextInt();
+            int type;
+
+            switch (option) {
+
+                case 1:
+                    type = 1;
+                    saveTypeTo(type);
+                    break;
+                case 2:
+                    type = 2;
+                    saveTypeTo(type);
+                    break;
+                case 3:
+                    type = 3;
+                    saveTypeTo(type);
+                    break;
+                case 4:
+                    System.out.println(" Change Office Username");
+                    String changeUsername = sc.next();
+                    System.out.println("Change Office Password");
+                    String changePassword = sc.next();
+                    loggedUser.changeUsernamePassword(changeUsername, changePassword);
+                    break;
+                case 5:
+                    return;
+                default:
+                    System.out.println("Invalid option, please try again.");
+                    break;
+
+            }
+
+        }
+    }
+    
+    
+    
 }
