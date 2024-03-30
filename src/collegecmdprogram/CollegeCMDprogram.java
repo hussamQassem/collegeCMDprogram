@@ -16,8 +16,8 @@ public class CollegeCMDprogram {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException {
-         Menu m = new Menu();
-         m.display();
+        Menu m = new Menu();
+        m.display();
     }
-    
+
 }

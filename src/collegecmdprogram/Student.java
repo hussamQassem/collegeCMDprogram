@@ -16,13 +16,13 @@ public class Student {
     private String studentStatus;
     private int studentGrade;
 
-       public Student(String studentId, String name, String studentProgramme, String studentStatus, int studentGrade) {
+    public Student(String studentId, String name, String studentProgramme, String studentStatus, int studentGrade) {
         this.studentId = studentId;
         this.name = name;
         this.studentProgramme = studentProgramme;
         this.studentStatus = studentStatus;
         this.studentGrade = studentGrade;
-    } 
+    }
 
     public String getStudentId() {
         return studentId;
@@ -43,5 +43,5 @@ public class Student {
     public int getStudentGrade() {
         return studentGrade;
     }
-    
+
 }

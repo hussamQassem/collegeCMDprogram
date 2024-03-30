@@ -16,14 +16,12 @@ import java.util.ArrayList;
  * @author hussa
  */
 public class DBConnection {
-    
+
     private final String DB_URL = "jdbc:mysql://localhost/?user=pooa2024&password=pooa2024";
     private final String USER = "pooa2024";
     private final String PASSWORD = "pooa2024";
 
-    
-    
-        public ArrayList<Courses> getCourseArray() throws SQLException {
+    public ArrayList<Courses> getCourseArray() throws SQLException {
 
         ArrayList<Courses> coursesList;
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
@@ -45,7 +43,8 @@ public class DBConnection {
         return coursesList;
 
     }
-            public ArrayList<Student> getStudentArray() throws SQLException {
+
+    public ArrayList<Student> getStudentArray() throws SQLException {
 
         ArrayList<Student> studentsList;
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
@@ -67,7 +66,8 @@ public class DBConnection {
         return studentsList;
 
     }
-      public ArrayList<Lecturers> getLecturerArray() throws SQLException {
+
+    public ArrayList<Lecturers> getLecturerArray() throws SQLException {
 
         ArrayList<Lecturers> lectureList;
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
@@ -82,13 +82,11 @@ public class DBConnection {
                 String moduleInSemester = rs.getString("semester_module");
                 int studentEnrolledNum = rs.getInt("number_of_students_enrolled");
                 String lectureSkills = rs.getString("lecturer_skills");
-                lectureList.add(new Lecturers(lecturerId,lectureName, lectureRoll, moduleInSemester, studentEnrolledNum, lectureSkills));
+                lectureList.add(new Lecturers(lecturerId, lectureName, lectureRoll, moduleInSemester, studentEnrolledNum, lectureSkills));
 
             }
         }
         return lectureList;
 
-    }  
+    }
 }
-
-

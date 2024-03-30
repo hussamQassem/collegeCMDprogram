@@ -4,7 +4,6 @@
  */
 package collegecmdprogram;
 
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,8 +19,6 @@ public class User {
     private String username;
     private String password;
     private UserRole role;
-
-   
 
     public User(String username, String password, UserRole role) {
         this.username = username;
@@ -115,7 +112,7 @@ public class User {
 
         System.out.println("No user with " + username + " username found.");
     }
-    
+
     public void changeUsernamePassword(String newUsername, String newPassword) {
         this.username = newUsername;
         this.password = newPassword;
@@ -153,8 +150,8 @@ public class User {
         }
 
     }
-    
-        public void generateStudentReport(OutputType outputType) throws SQLException {
+
+    public void generateStudentReport(OutputType outputType) throws SQLException {
         if (this.role != UserRole.OFFICE) {
             System.out.println("Only OFFICE users can generate Student Reports");
             return;
@@ -230,11 +227,5 @@ public class User {
             System.out.println(e);
         }
     }
-    
-    
-    
-    
-    
-    
-    
+
 }

@@ -16,8 +16,8 @@ public class Lecturers {
     private String moduleInSemester;
     private int studentEnrolledNum;
     private String lectureSkills;
-    
-        public Lecturers(String lecturerId, String lectureName, String lectureRoll, String moduleInSemester, int studentEnrolledNum, String lectureSkills) {
+
+    public Lecturers(String lecturerId, String lectureName, String lectureRoll, String moduleInSemester, int studentEnrolledNum, String lectureSkills) {
         this.lecturerId = lecturerId;
         this.lectureName = lectureName;
         this.lectureRoll = lectureRoll;
@@ -49,7 +49,5 @@ public class Lecturers {
     public String getLectureSkills() {
         return lectureSkills;
     }
-        
-        
-        
+
 }

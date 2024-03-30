@@ -7,6 +7,8 @@ package collegecmdprogram;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -48,13 +50,13 @@ public class Menu {
             }
 
             if (loggedUser.getRole() == UserRole.ADMIN) {
-                
+
             } else if (loggedUser.getRole() == UserRole.OFFICE) {
-                
+
             } else {
-                
+
             }
-            
+
             loggedUser = null;
         }
 
@@ -115,7 +117,8 @@ public class Menu {
         }
 
     }
-        public void officeMenu() throws SQLException {
+
+    public void officeMenu() throws SQLException {
         while (true) {
             System.out.println("1- Generate Courses Report");
             System.out.println("2- Generate Student Report");
@@ -156,8 +159,7 @@ public class Menu {
 
         }
     }
-    
-    
+
     public void saveTypeTo(int type) throws SQLException {
         while (true) {
             System.out.println("1- Save To TXT File");
@@ -177,7 +179,7 @@ public class Menu {
                         System.out.println("CSV File Saved");
                         break;
                     case 3:
-                        
+
                         System.out.println("Dispaly On Console");
                         break;
                     case 4:
@@ -198,7 +200,7 @@ public class Menu {
                         System.out.println("CSV File Saved");
                         break;
                     case 3:
-                        
+
                         System.out.println("Dispaly On Console");
                         break;
                     case 4:
@@ -219,7 +221,7 @@ public class Menu {
                         System.out.println("CSV File Saved");
                         break;
                     case 3:
-                        
+
                         System.out.println("Dispaly On Console");
                         break;
                     case 4:
@@ -233,7 +235,8 @@ public class Menu {
 
         }
     }
-        public void lecturerMenu() throws SQLException {
+
+    public void lecturerMenu() throws SQLException {
         while (true) {
             System.out.println("1- Generate Lecturer Report");
             System.out.println("2- Change Username And Password");
@@ -246,7 +249,7 @@ public class Menu {
                     System.out.println("1- Save To TXT File");
                     System.out.println("2- Save To CSV File");
                     System.out.println("3- Display On Console");
-                    
+
                     int reportOption = sc.nextInt();
                     if (reportOption == 1) {
                         loggedUser.generateLecturerReport(OutputType.TXT);
@@ -278,5 +281,52 @@ public class Menu {
         }
 
     }
-    
+        public void displayStudentOnConsole() {
+        try {
+            ArrayList<Student> studentsTable = db.getStudentArray();
+
+            for (Student sTable : studentsTable) {
+                System.out.println(String.format("'%s', '%s', '%s', '%s', %d;",
+                        sTable.getStudentId(), sTable.getName(), sTable.getStudentProgramme(), sTable.getStudentStatus(), sTable.getStudentGrade()));
+
+            }
+            System.out.println("------------------------------------------------------------------------");
+        } catch (SQLException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void displayCoursesOnConsole() {
+        try {
+
+            ArrayList<Courses> courses = db.getCourseArray();
+            for (Courses courseTable : courses) {
+                System.out.println(String.format("'%s', '%s', %d, '%s', '%s';",
+                        courseTable.getModule(), courseTable.getInprogramm(), courseTable.getStudentsNum(), courseTable.getLecturer(), courseTable.getRoomType()));
+
+            }
+            System.out.println("------------------------------------------------------------------------");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void displayLecturerOnConsole() {
+        try {
+            ArrayList<Lecturers> lecturer = db.getLecturerArray();
+            for (Lecturers lTable : lecturer) {
+                System.out.println(String.format("'%s', '%s', '%s', %d,'%s', ;",
+                        lTable.getLectureName(), lTable.getLectureRoll(), lTable.getModuleInSemester(), lTable.getStudentEnrolledNum(), lTable.getLectureSkills()));
+
+            }
+            System.out.println("------------------------------------------------------------------------");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
 }
