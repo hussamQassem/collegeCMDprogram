@@ -154,7 +154,82 @@ public class User {
 
     }
     
-    
+        public void generateStudentReport(OutputType outputType) throws SQLException {
+        if (this.role != UserRole.OFFICE) {
+            System.out.println("Only OFFICE users can generate Student Reports");
+            return;
+        }
+
+        try {
+            BufferedWriter wr;
+            if (outputType == OutputType.CSV) {
+                wr = new BufferedWriter(new FileWriter("output.csv", true));
+            } else {
+                wr = new BufferedWriter(new FileWriter("output.txt", true));
+            }
+
+            ArrayList<Student> students = new DBConnection().getStudentArray();
+            wr.newLine();
+            wr.write("Student ID, Student Name, Student Programme, Student Status, Student Grade");
+            wr.newLine();
+            for (Student sTable : students) {
+                String outputLine = String.format("'%s', '%s', '%s', '%s', %d",
+                        sTable.getStudentId(), sTable.getName(), sTable.getStudentProgramme(), sTable.getStudentStatus(), sTable.getStudentGrade());
+                wr.write(outputLine);
+                wr.newLine();
+            }
+
+            wr.close();
+            System.out.println("saved to txt file");
+
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void generateLecturerReport(OutputType outputType) throws SQLException {
+        if (this.role == UserRole.ADMIN) {
+            System.out.println("ADMIN user cannot generate Lecture Reports");
+            return;
+        }
+
+        try {
+            BufferedWriter wr;
+            if (outputType == OutputType.CSV) {
+                wr = new BufferedWriter(new FileWriter("output.csv", true));
+            } else {
+                wr = new BufferedWriter(new FileWriter("output.txt", true));
+            }
+
+            ArrayList<Lecturers> lecturer;
+
+            if (this.role == UserRole.OFFICE) {
+                lecturer = new DBConnection().getLecturerArray();
+            } else {
+                // TODO: Create a custom method for LECTURE
+                lecturer = new DBConnection().getLecturerArray();
+            }
+
+            wr.newLine();
+            wr.write("Lecture Name,Lecture Roll,Modules In Semester,Number Of Student Enrolled ,Lecture Skills");
+            wr.newLine();
+            for (Lecturers lTable : lecturer) {
+                String outputLine = String.format("'%s', '%s', '%s', %d,'%s'",
+                        lTable.getLectureName(),
+                        lTable.getLectureRoll(),
+                        lTable.getModuleInSemester(),
+                        lTable.getStudentEnrolledNum(),
+                        lTable.getLectureSkills());
+
+                wr.write(outputLine);
+                wr.newLine();
+            }
+            wr.close();
+
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
     
     
     
