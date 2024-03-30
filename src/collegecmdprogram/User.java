@@ -121,6 +121,38 @@ public class User {
         this.password = newPassword;
     }
 
+    public void generateCourseReport(OutputType outputType) throws SQLException {
+        if (this.role != UserRole.OFFICE) {
+            System.out.println("Only OFFICE users can generate Course Reports");
+            return;
+        }
+
+        try {
+            BufferedWriter wr;
+            if (outputType == OutputType.CSV) {
+                wr = new BufferedWriter(new FileWriter("output.csv", true));
+            } else {
+                wr = new BufferedWriter(new FileWriter("output.txt", true));
+            }
+
+            ArrayList<Courses> courses = new DBConnection().getCourseArray();
+            wr.write("Module, programme, Number Of Student Enrolled, Lecturer Name, Room Type");
+            wr.newLine();
+            for (Courses courseTable : courses) {
+                String outputLine = String.format("'%s', '%s', %d, '%s', '%s'",
+                        courseTable.getModule(), courseTable.getInprogramm(), courseTable.getStudentsNum(), courseTable.getLecturer(), courseTable.getRoomType());
+                wr.write(outputLine);
+                wr.newLine();
+
+            }
+
+            wr.close();
+
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
+    }
     
     
     
