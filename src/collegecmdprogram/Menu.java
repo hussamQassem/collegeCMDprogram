@@ -4,6 +4,9 @@
  */
 package collegecmdprogram;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -179,8 +182,9 @@ public class Menu {
                         System.out.println("CSV File Saved");
                         break;
                     case 3:
+                        displayCoursesOnConsole();
 
-                        System.out.println("Dispaly On Console");
+                        
                         break;
                     case 4:
                         System.out.println("Exit");
@@ -201,7 +205,7 @@ public class Menu {
                         break;
                     case 3:
 
-                        System.out.println("Dispaly On Console");
+                        displayStudentOnConsole();
                         break;
                     case 4:
                         System.out.println("Exit");
@@ -222,7 +226,7 @@ public class Menu {
                         break;
                     case 3:
 
-                        System.out.println("Dispaly On Console");
+                        displayLecturerOnConsole();
                         break;
                     case 4:
                         System.out.println("Exit");
@@ -328,5 +332,33 @@ public class Menu {
         }
 
     }
+    public void writeStudentsTo(OutputType outputType) throws SQLException {
 
+        try {
+            BufferedWriter wr;
+            if (outputType == OutputType.CSV) {
+                wr = new BufferedWriter(new FileWriter("output.csv", true));
+            } else {
+                wr = new BufferedWriter(new FileWriter("output.txt", true));
+            }
+
+            ArrayList<Student> students = db.getStudentArray();
+            wr.newLine();
+            wr.write("Student ID, Student Name, Student Programme, Student Status, Student Grade");
+            wr.newLine();
+            for (Student sTable : students) {
+                String outputLine = String.format("'%s', '%s', '%s', '%s', %d",
+                        sTable.getStudentId(), sTable.getName(), sTable.getStudentProgramme(), sTable.getStudentStatus(), sTable.getStudentGrade());
+                wr.write(outputLine);
+                wr.newLine();
+            }
+
+            wr.close();
+            System.out.println("saved to txt file");
+
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
+    }
 }
