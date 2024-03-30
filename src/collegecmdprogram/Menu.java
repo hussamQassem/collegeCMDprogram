@@ -129,21 +129,21 @@ public class Menu {
             System.out.println("4- Change Username And Password");
             System.out.println("5- Exit");
             option = sc.nextInt();
-            int type;
+            int reportType;
 
             switch (option) {
 
                 case 1:
-                    type = 1;
-                    saveTypeTo(type);
+                    reportType = 1;
+                    saveTypeTo(reportType);
                     break;
                 case 2:
-                    type = 2;
-                    saveTypeTo(type);
+                    reportType = 2;
+                    saveTypeTo(reportType);
                     break;
                 case 3:
-                    type = 3;
-                    saveTypeTo(type);
+                    reportType = 3;
+                    saveTypeTo(reportType);
                     break;
                 case 4:
                     System.out.println(" Change Office Username");
@@ -163,7 +163,7 @@ public class Menu {
         }
     }
 
-    public void saveTypeTo(int type) throws SQLException {
+    public void saveTypeTo(int reportType) throws SQLException {
         while (true) {
             System.out.println("1- Save To TXT File");
             System.out.println("2- Save To CSV File");
@@ -171,7 +171,7 @@ public class Menu {
             System.out.println("4- Exit");
 
             int fileOption = sc.nextInt();
-            if (type == 1) {
+            if (reportType == 1) {
                 switch (fileOption) {
                     case 1:
                         loggedUser.generateCourseReport(OutputType.TXT);
@@ -193,7 +193,7 @@ public class Menu {
                         System.out.println("Please Enter Valid Option");
                         break;
                 }
-            } else if (type == 2) {
+            } else if (reportType == 2) {
                 switch (fileOption) {
                     case 1:
                         loggedUser.generateStudentReport(OutputType.TXT);
@@ -214,7 +214,7 @@ public class Menu {
                         System.out.println("Please Enter Valid Option");
                         break;
                 }
-            } else if (type == 3) {
+            } else if (reportType == 3) {
                 switch (fileOption) {
                     case 1:
                         loggedUser.generateLecturerReport(OutputType.TXT);
