@@ -233,5 +233,50 @@ public class Menu {
 
         }
     }
+        public void lecturerMenu() throws SQLException {
+        while (true) {
+            System.out.println("1- Generate Lecturer Report");
+            System.out.println("2- Change Username And Password");
+            System.out.println("3- Exit");
+            option = sc.nextInt();
+
+            switch (option) {
+
+                case 1:
+                    System.out.println("1- Save To TXT File");
+                    System.out.println("2- Save To CSV File");
+                    System.out.println("3- Display On Console");
+                    
+                    int reportOption = sc.nextInt();
+                    if (reportOption == 1) {
+                        loggedUser.generateLecturerReport(OutputType.TXT);
+                        System.out.println("TXT File Saved");
+                    } else if (reportOption == 2) {
+                        loggedUser.generateLecturerReport(OutputType.CSV);
+                        System.out.println("CSV File Saved");
+                    } else if (reportOption == 3) {
+                        System.out.println("Dispaly On Console");
+                    } else {
+                        System.out.println("Please Enter Valid Option");
+                    }
+                    break;
+                case 2:
+                    System.out.println(" Change Lecturer Username");
+                    String changeUsername = sc.next();
+                    System.out.println("Change Lecturer Password");
+                    String changePassword = sc.next();
+                    loggedUser.changeUsernamePassword(changeUsername, changePassword);
+                    break;
+                case 3:
+                    return;
+                default:
+                    System.out.println("Invalid option, please try again.");
+                    break;
+
+            }
+
+        }
+
+    }
     
 }
