@@ -389,4 +389,34 @@ public class Menu {
         }
 
     }
+            public void writeLecturersTo(OutputType outputType) throws SQLException {
+        try {
+            BufferedWriter wr;
+            if (outputType == OutputType.CSV) {
+                wr = new BufferedWriter(new FileWriter("output.csv", true));
+            } else {
+                wr = new BufferedWriter(new FileWriter("output.txt", true));
+            }
+            ArrayList<Lecturers> lecturer = db.getLecturerArray();
+            wr.newLine();
+            wr.write("Lecture Name,Lecture Roll,Modules In Semester,Number Of Student Enrolled ,Lecture Skills");
+            wr.newLine();
+            for (Lecturers lTable : lecturer) {
+                String outputLine = String.format("'%s', '%s', '%s', %d,'%s'",
+                        lTable.getLectureName(),
+                        lTable.getLectureRoll(),
+                        lTable.getModuleInSemester(),
+                        lTable.getStudentEnrolledNum(),
+                        lTable.getLectureSkills());
+
+                wr.write(outputLine);
+                wr.newLine();
+            }
+            wr.close();
+
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
+    }
 }
