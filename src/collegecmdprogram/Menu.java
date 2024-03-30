@@ -4,6 +4,7 @@
  */
 package collegecmdprogram;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -12,9 +13,15 @@ import java.util.Scanner;
  */
 public class Menu {
 
+    DBConnection db = new DBConnection();
+    private User loggedUser;
+    private ArrayList<User> users = new ArrayList();
     Scanner sc = new Scanner(System.in);
-    private User user = new User("admin", "java", UserRole.ADMIN);
     int option;
+
+    public Menu() {
+        users.add(new User("admin", "java", UserRole.ADMIN));
+    }
 
     public void display() {
 
@@ -55,7 +62,7 @@ public class Menu {
                     String addPassword = sc.nextLine();
                     System.out.println("Enter The User Role");
                     String addRole = sc.nextLine();
-                    user.addUser(addUsername, addPassword, UserRole.valueOf(addRole.toUpperCase()));
+                    loggedUser.addUser(users, addUsername, addPassword, UserRole.valueOf(addRole.toUpperCase()));
                     break;
                 case 2:
                     System.out.println("Enter Old Username to modify");
@@ -66,19 +73,19 @@ public class Menu {
                     String newPassword = sc.nextLine();
                     System.out.println("Enter New Role");
                     String newRole = sc.nextLine();
-                    user.modifyUser(oldUsername, newUsername, newPassword, UserRole.valueOf(newRole.toUpperCase()));
+                    loggedUser.modifyUser(users, oldUsername, newUsername, newPassword, UserRole.valueOf(newRole.toUpperCase()));
                     break;
                 case 3:
                     System.out.println(" Enter Username to remove");
                     String removeUser = sc.nextLine();
-                    user.removeUser(removeUser);
+                      loggedUser.removeUser(users, removeUser);
                     break;
                 case 4:
                     System.out.println(" Change Admin Username");
                     String changeUsername = sc.nextLine();
                     System.out.println("Change Admin Password");
                     String changePassword = sc.nextLine();
-                    user.changeUsernamePassword(changeUsername, changePassword);
+                    loggedUser.changeUsernamePassword(changeUsername, changePassword);
                     break;
                 case 5:
                 case 6:

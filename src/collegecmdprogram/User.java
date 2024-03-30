@@ -4,6 +4,11 @@
  */
 package collegecmdprogram;
 
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -15,7 +20,8 @@ public class User {
     private String username;
     private String password;
     private UserRole role;
-    private ArrayList<User> users = new ArrayList();
+
+   
 
     public User(String username, String password, UserRole role) {
         this.username = username;
@@ -47,24 +53,24 @@ public class User {
         this.role = role;
     }
 
-    public void addUser(String username, String password, UserRole role) {
+    public void addUser(ArrayList<User> users, String username, String password, UserRole role) {
         if (this.role != UserRole.ADMIN) {
             System.out.println("Only ADMIN user can add new users");
             return;
         }
 
-        for (User user : this.users) {
+        for (User user : users) {
             if (user.username.equals(username)) {
                 System.out.println("There is already an user with " + username + " username.");
                 return;
             }
         }
 
-        this.users.add(new User(username, password, role));
+        users.add(new User(username, password, role));
         System.out.println("User " + username + " with role " + role + " created.");
     }
 
-    public void modifyUser(String oldUsername, String newUsername, String newPassword, UserRole newUserRole) {
+    public void modifyUser(ArrayList<User> users, String oldUsername, String newUsername, String newPassword, UserRole newUserRole) {
         if (this.role != UserRole.ADMIN) {
             System.out.println("Only ADMIN user can modify users");
             return;
@@ -75,7 +81,7 @@ public class User {
             return;
         }
 
-        for (User user : this.users) {
+        for (User user : users) {
             if (user.username.equals(oldUsername)) {
                 user.username = newUsername;
                 user.password = newPassword;
@@ -87,9 +93,8 @@ public class User {
 
         System.out.println("No user with " + oldUsername + " username found.");
     }
-    
-    
-    public void removeUser(String username) {
+
+    public void removeUser(ArrayList<User> users, String username) {
         if (this.role != UserRole.ADMIN) {
             System.out.println("Only ADMIN user can remove users");
             return;
@@ -100,9 +105,9 @@ public class User {
             return;
         }
 
-        for (User user : this.users) {
+        for (User user : users) {
             if (user.username.equals(username)) {
-                this.users.remove(user);
+                users.remove(user);
                 System.out.println(username + " username has been removed.");
                 return;
             }
@@ -110,8 +115,11 @@ public class User {
 
         System.out.println("No user with " + username + " username found.");
     }
+    
     public void changeUsernamePassword(String newUsername, String newPassword) {
         this.username = newUsername;
         this.password = newPassword;
     }
+
+
 }
