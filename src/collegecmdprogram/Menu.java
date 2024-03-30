@@ -4,6 +4,7 @@
  */
 package collegecmdprogram;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -23,73 +24,95 @@ public class Menu {
         users.add(new User("admin", "java", UserRole.ADMIN));
     }
 
-    public void display() {
+    public void display() throws SQLException {
 
         while (true) {
-            System.out.println("Admin Login");
-            System.out.println("Enter User Name");
-            String adminUsernameInput = sc.nextLine();
-            System.out.println("Enter Password");
-            String adminPasswordInput = sc.nextLine();
+            while (loggedUser == null) {
+                System.out.println("Login");
+                System.out.println("Enter User Name");
+                String username = sc.next();
+                System.out.println("Enter Password");
+                String password = sc.next();
 
-            if (adminUsernameInput.equals("admin") && adminPasswordInput.equals("java")) {
-                AdminMenu();
-
-            } else {
-                System.out.println(" incorrect login");
+                for (User user : users) {
+                    if (user.getUsername().equals(username)) {
+                        if (user.getPassword().equals(password)) {
+                            loggedUser = user;
+                        } else {
+                            System.out.println("Incorrect password.");
+                            break;
+                        }
+                    }
+                }
+                System.out.println("The user " + username + " doesn't exits.");
             }
+
+            if (loggedUser.getRole() == UserRole.ADMIN) {
+                
+            } else if (loggedUser.getRole() == UserRole.OFFICE) {
+                
+            } else {
+                
+            }
+            
+            loggedUser = null;
         }
 
     }
 
-    public void AdminMenu() {
-        System.out.println("Please Choose Option");
-        System.out.println("1- Add User");
-        System.out.println("2- Modify User");
-        System.out.println("3- Remove user");
-        System.out.println("4- Change password");
-        System.out.println("5- Acsses Other Users");
-        System.out.println("6- Exit");
-        option = sc.nextInt();
-
+    public void adminMenu() throws SQLException {
         while (true) {
+            System.out.println("Please Choose Option");
+            System.out.println("1- Add User");
+            System.out.println("2- Modify User");
+            System.out.println("3- Remove user");
+            System.out.println("4- Change password");
+            System.out.println("5- Exit");
+            option = sc.nextInt();
 
             switch (option) {
                 case 1:
                     System.out.println("Enter new Username");
-                    String addUsername = sc.nextLine();
+                    String addUsername = sc.next();
                     System.out.println("Enter new Password");
-                    String addPassword = sc.nextLine();
-                    System.out.println("Enter The User Role");
-                    String addRole = sc.nextLine();
+                    String addPassword = sc.next();
+                    System.out.println("Enter The User Role: (ADMIN, OFFICE, LECTURER");
+                    String addRole = sc.next();
                     loggedUser.addUser(users, addUsername, addPassword, UserRole.valueOf(addRole.toUpperCase()));
                     break;
                 case 2:
                     System.out.println("Enter Old Username to modify");
-                    String oldUsername = sc.nextLine();
+                    String oldUsername = sc.next();
                     System.out.println("Enter New Username");
-                    String newUsername = sc.nextLine();
+                    String newUsername = sc.next();
                     System.out.println("Enter New Password");
-                    String newPassword = sc.nextLine();
+                    String newPassword = sc.next();
                     System.out.println("Enter New Role");
-                    String newRole = sc.nextLine();
+                    String newRole = sc.next();
                     loggedUser.modifyUser(users, oldUsername, newUsername, newPassword, UserRole.valueOf(newRole.toUpperCase()));
                     break;
                 case 3:
                     System.out.println(" Enter Username to remove");
-                    String removeUser = sc.nextLine();
-                      loggedUser.removeUser(users, removeUser);
+                    String removeUser = sc.next();
+                    loggedUser.removeUser(users, removeUser);
                     break;
                 case 4:
                     System.out.println(" Change Admin Username");
-                    String changeUsername = sc.nextLine();
+                    String changeUsername = sc.next();
                     System.out.println("Change Admin Password");
-                    String changePassword = sc.nextLine();
+                    String changePassword = sc.next();
                     loggedUser.changeUsernamePassword(changeUsername, changePassword);
                     break;
                 case 5:
-                case 6:
+                    System.out.println("Looged out.");
+                    return;
+                default:
+                    System.out.println("Invalid option, please try again.");
+                    break;
+
             }
+
         }
+
     }
 }
