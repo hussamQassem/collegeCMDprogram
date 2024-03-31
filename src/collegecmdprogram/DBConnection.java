@@ -9,7 +9,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -30,13 +33,13 @@ public class DBConnection {
             ResultSet rs = PreparedStatement.executeQuery();
             coursesList = new ArrayList<>();
             while (rs.next()) {
-
+                String moduleId = rs.getString("module_id");
                 String module = rs.getString("module_name");
                 String inprogramm = rs.getString("programme");
                 int studentsNum = rs.getInt("number_of_students_enrolled");
                 String lecturer = rs.getString("lecturer_name");
                 String roomType = rs.getString("room_or_location");
-                coursesList.add(new Courses(module, inprogramm, studentsNum, lecturer, roomType));
+                coursesList.add(new Courses(moduleId,module, inprogramm, studentsNum, lecturer, roomType));
 
             }
         }
@@ -87,6 +90,20 @@ public class DBConnection {
             }
         }
         return lectureList;
+
+    }
+
+    public void addToCourses(Courses cors) {
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            Statement stmt = conn.createStatement();
+            stmt.execute("USE CourseManagementSystem;");
+            stmt.execute(String.format("INSERT INTO Courses(module_id,module_name,programme,number_of_students_enrolled,lecturer_name,room_or_location) VALUES('%s','%s','%s',%d,'%s','%s');",
+                    cors.getModuleId(), cors.getModule(), cors.getInprogramm(), cors.getStudentsNum(), cors.getLecturer(), cors.getRoomType()));
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 }

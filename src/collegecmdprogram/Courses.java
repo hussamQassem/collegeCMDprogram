@@ -9,17 +9,24 @@ package collegecmdprogram;
  * @author hussa
  */
 public class Courses {
-
+String moduleId;
     private String module;
     private String inprogramm;
     private int studentsNum;
     private String roomType;
 
-    public Courses(String module, String inprogramm, int studentsNum, String lecturer, String roomType) {
+    public Courses(String moduleId,String module, String inprogramm, int studentsNum, String lecturer, String roomType) {
+        this.moduleId = moduleId;
         this.module = module;
         this.inprogramm = inprogramm;
         this.studentsNum = studentsNum;
         this.lecturer = lecturer;
+    }
+
+  
+
+    public String getModuleId() {
+        return moduleId;
     }
 
     private String lecturer;

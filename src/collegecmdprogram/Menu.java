@@ -23,6 +23,7 @@ public class Menu {
     private User loggedUser;
     private ArrayList<User> users = new ArrayList();
     Scanner sc = new Scanner(System.in);
+    Courses course = new Courses("", "", "", 0, "", "");
     int option;
 
     public Menu() {
@@ -418,6 +419,39 @@ public class Menu {
 
         } catch (IOException e) {
             System.out.println(e);
+        }
+
+    }
+                public void addToreport() throws SQLException {
+        while (true) {
+
+            System.out.println("Please choose the report to generait more data");
+            System.out.println("1- Courses");
+            System.out.println("2- Student");
+            System.out.println("3- Lecturer");
+            System.out.println("4- Exit");
+            option = sc.nextInt();
+            switch (option) {
+                case 1:
+                    System.out.println("Enter The Module ID.");
+                    String moduleID = sc.next();
+                    System.out.println("Enter The Module Name.");
+                    String moduleName = sc.next();
+                    System.out.println("Enter The programme Name.");
+                    String courseProgramme = sc.next();
+                    System.out.println("How Many Students Enrolled");
+                    int studentsEnrolled = sc.nextInt();
+                    System.out.println("Enter The Lecturer Name.");
+                    String lecturerName = sc.next();
+                    System.out.println("Enter Room Or Location");
+                    String roomOrLocation = sc.next();
+                    
+                case 2:
+                case 3:
+                case 4:
+                    return;
+
+            }
         }
 
     }
