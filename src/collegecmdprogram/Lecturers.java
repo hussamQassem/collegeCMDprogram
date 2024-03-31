@@ -10,6 +10,7 @@ package collegecmdprogram;
  *
  * @author hussa
  */
+// lecturers class with constructor and getters
 public class Lecturers {
 
     String lecturerId;

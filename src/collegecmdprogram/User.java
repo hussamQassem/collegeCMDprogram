@@ -14,18 +14,19 @@ import java.util.ArrayList;
  *
  * @author hussa
  */
+// 
 public class User {
 
     private String username;
     private String password;
     private UserRole role;
-
+// constructor
     public User(String username, String password, UserRole role) {
         this.username = username;
         this.password = password;
         this.role = role;
     }
-
+//getters
     public String getUsername() {
         return username;
     }
@@ -49,7 +50,7 @@ public class User {
     public void setRole(UserRole role) {
         this.role = role;
     }
-
+// add user method that check if user exist and adding new one with username password and role in not exist
     public void addUser(ArrayList<User> users, String username, String password, UserRole role) {
         if (this.role != UserRole.ADMIN) {
             System.out.println("Only ADMIN user can add new users");
@@ -66,7 +67,7 @@ public class User {
         users.add(new User(username, password, role));
         System.out.println("User " + username + " with role " + role + " created.");
     }
-
+// method that allow to modify existing users credentials 
     public void modifyUser(ArrayList<User> users, String oldUsername, String newUsername, String newPassword, UserRole newUserRole) {
         if (this.role != UserRole.ADMIN) {
             System.out.println("Only ADMIN user can modify users");
@@ -90,7 +91,7 @@ public class User {
 
         System.out.println("No user with " + oldUsername + " username found.");
     }
-
+// methos to remove existed users
     public void removeUser(ArrayList<User> users, String username) {
         if (this.role != UserRole.ADMIN) {
             System.out.println("Only ADMIN user can remove users");
@@ -112,12 +113,12 @@ public class User {
 
         System.out.println("No user with " + username + " username found.");
     }
-
+// this method that will allow every user to change password and username
     public void changeUsernamePassword(String newUsername, String newPassword) {
         this.username = newUsername;
         this.password = newPassword;
     }
-
+// this method will allow to generate courses reports and write it to a file only for office users
     public void generateCourseReport(OutputType outputType) throws SQLException {
         if (this.role != UserRole.OFFICE) {
             System.out.println("Only OFFICE users can generate Course Reports");
@@ -150,7 +151,7 @@ public class User {
         }
 
     }
-
+// this method will allow to generate student reports and write it to a file only for office users
     public void generateStudentReport(OutputType outputType) throws SQLException {
         if (this.role != UserRole.OFFICE) {
             System.out.println("Only OFFICE users can generate Student Reports");
@@ -183,7 +184,7 @@ public class User {
             System.out.println(e);
         }
     }
-
+// this method will allow to generate lecturers reports and write it to a file only for office , lecturer users
     public void generateLecturerReport(OutputType outputType) throws SQLException {
         if (this.role == UserRole.ADMIN) {
             System.out.println("ADMIN user cannot generate Lecture Reports");

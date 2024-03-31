@@ -20,14 +20,14 @@ import java.util.logging.Logger;
  * @author hussa
  */
 public class DBConnection {
-
+// creating connection with the sql database
     private final String DB_URL = "jdbc:mysql://localhost/?user=root&password=1989";
 
     private final String USER = "root";
     private final String PASSWORD = "1989";
 
 
-
+// array lists of courses, student, lecturers that will read from the database and save it in the arraylist
     public ArrayList<Courses> getCourseArray() throws SQLException {
 
         ArrayList<Courses> coursesList;
@@ -97,29 +97,8 @@ public class DBConnection {
 
     }
 
-    public ArrayList<Lecturers> getLecturerArray(String Le) throws SQLException {
 
-        ArrayList<Lecturers> lectureList;
-        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
-            PreparedStatement PreparedStatement = conn.prepareStatement("SELECT * FROM Lecturers ");
-            PreparedStatement.execute("USE CourseManagementSystem;");
-            ResultSet rs = PreparedStatement.executeQuery();
-            lectureList = new ArrayList<>();
-            while (rs.next()) {
-                String lecturerId = rs.getString("lecturer_id");
-                String lectureName = rs.getString("lecturer_name");
-                String lectureRoll = rs.getString("lecturer_role");
-                String moduleInSemester = rs.getString("semester_module");
-                int studentEnrolledNum = rs.getInt("number_of_students_enrolled");
-                String lectureSkills = rs.getString("lecturer_skills");
-                lectureList.add(new Lecturers(lecturerId, lectureName, lectureRoll, moduleInSemester, studentEnrolledNum, lectureSkills));
-
-            }
-        }
-        return lectureList;
-
-    }
-
+// this method will create connection with the database and allow to add  data to courses table in the database
     public void addToCourses(Courses cors) {
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
@@ -133,7 +112,7 @@ public class DBConnection {
         }
 
     }
-
+// this method will create connection with the database and allow to add data to students table in the database
     public void addToStudent(Student stdnt) {
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
@@ -146,7 +125,7 @@ public class DBConnection {
         }
 
     }
-
+// this method will create connection with the database and allow to add  data to lecturers table in the database
     public void addToLecturer(Lecturers lectr) {
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);

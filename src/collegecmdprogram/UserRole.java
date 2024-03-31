@@ -8,6 +8,7 @@ package collegecmdprogram;
  *
  * @author hussa
  */
+//enum class of the users level
 public enum UserRole {
     ADMIN,
     OFFICE,

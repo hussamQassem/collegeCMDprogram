@@ -9,6 +9,7 @@ package collegecmdprogram;
  *
  * @author hussa
  */
+// courses class with constructors, and getters 
 public class Courses {
 String moduleId;
     String module;

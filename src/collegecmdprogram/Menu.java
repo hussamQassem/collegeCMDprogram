@@ -27,11 +27,11 @@ public class Menu {
     Scanner sc = new Scanner(System.in);
 
     int option;
-
+// menu method will add the admin username and password
     public Menu() {
         users.add(new User("admin", "java", UserRole.ADMIN));
     }
-
+// display method that will allow only admin log in as start
     public void display() throws SQLException {
 
         while (true) {
@@ -67,7 +67,7 @@ public class Menu {
         }
 
     }
-
+// this admin menu will display the admin options
     public void adminMenu() throws SQLException {
         while (true) {
             System.out.println("Please Choose Option");
@@ -123,7 +123,7 @@ public class Menu {
         }
 
     }
-
+// office menu that dispaly the office options
     public void officeMenu() throws SQLException {
         while (true) {
             System.out.println("1- Generate Courses Report");
@@ -168,7 +168,7 @@ public class Menu {
 
         }
     }
-
+// lecturer menu will display only lecturer users option
     public void lecturerMenu() throws SQLException {
         while (true) {
             System.out.println("1- Generate Lecturer Report");
@@ -232,7 +232,7 @@ public class Menu {
         }
 
     }
-
+// menu that can be accessed by office and lecturers users that display options of file type to save reports
     public void saveTypeTo(int reportType) throws SQLException {
         while (true) {
             System.out.println("1- Save To TXT File");
@@ -308,7 +308,7 @@ public class Menu {
 
         }
     }
-
+// method that will invoke data from the student table and display it on the console
     public void displayStudentOnConsole() {
         try {
             ArrayList<Student> studentsTable = db.getStudentArray();
@@ -323,7 +323,7 @@ public class Menu {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+// method that will invoke data from the course table and display it on the console
     public void displayCoursesOnConsole() {
         try {
 
@@ -340,7 +340,7 @@ public class Menu {
         }
 
     }
-
+// method that will invoke data from the lecturers table and display it on the console
     public void displayLecturerOnConsole() {
         try {
             ArrayList<Lecturers> lecturer = db.getLecturerArray();
@@ -357,95 +357,6 @@ public class Menu {
 
     }
 
-    public void writeStudentsTo(OutputType outputType) throws SQLException {
-
-        try {
-            BufferedWriter wr;
-            if (outputType == OutputType.CSV) {
-                wr = new BufferedWriter(new FileWriter("output.csv", true));
-            } else {
-                wr = new BufferedWriter(new FileWriter("output.txt", true));
-            }
-
-            ArrayList<Student> students = db.getStudentArray();
-            wr.newLine();
-            wr.write("Student ID, Student Name, Student Programme, Student Status, Student Grade");
-            wr.newLine();
-            for (Student sTable : students) {
-                String outputLine = String.format("'%s', '%s', '%s', '%s', %d",
-                        sTable.getStudentId(), sTable.getName(), sTable.getStudentProgramme(), sTable.getStudentStatus(), sTable.getStudentGrade());
-                wr.write(outputLine);
-                wr.newLine();
-            }
-
-            wr.close();
-            System.out.println("saved to txt file");
-
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-
-    }
-
-    public void writeCourcesTo(OutputType outputType) throws SQLException {
-
-        try {
-            BufferedWriter wr;
-            if (outputType == OutputType.CSV) {
-                wr = new BufferedWriter(new FileWriter("output.csv", true));
-            } else {
-                wr = new BufferedWriter(new FileWriter("output.txt", true));
-            }
-
-            ArrayList<Courses> courses = db.getCourseArray();
-            wr.write("Module, programme, Number Of Student Enrolled, Lecturer Name, Room Type");
-            wr.newLine();
-            for (Courses courseTable : courses) {
-                String outputLine = String.format("'%s', '%s', %d, '%s', '%s'",
-                        courseTable.getModule(), courseTable.getInprogramm(), courseTable.getStudentsNum(), courseTable.getLecturer(), courseTable.getRoomType());
-                wr.write(outputLine);
-                wr.newLine();
-
-            }
-
-            wr.close();
-
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-
-    }
-
-    public void writeLecturersTo(OutputType outputType) throws SQLException {
-        try {
-            BufferedWriter wr;
-            if (outputType == OutputType.CSV) {
-                wr = new BufferedWriter(new FileWriter("output.csv", true));
-            } else {
-                wr = new BufferedWriter(new FileWriter("output.txt", true));
-            }
-            ArrayList<Lecturers> lecturer = db.getLecturerArray();
-            wr.newLine();
-            wr.write("Lecture Name,Lecture Roll,Modules In Semester,Number Of Student Enrolled ,Lecture Skills");
-            wr.newLine();
-            for (Lecturers lTable : lecturer) {
-                String outputLine = String.format("'%s', '%s', '%s', %d,'%s'",
-                        lTable.getLectureName(),
-                        lTable.getLectureRoll(),
-                        lTable.getModuleInSemester(),
-                        lTable.getStudentEnrolledNum(),
-                        lTable.getLectureSkills());
-
-                wr.write(outputLine);
-                wr.newLine();
-            }
-            wr.close();
-
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-
-    }
 
     public void addToreport() throws SQLException {
         while (true) {

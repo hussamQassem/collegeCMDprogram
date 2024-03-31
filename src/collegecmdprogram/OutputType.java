@@ -8,6 +8,7 @@ package collegecmdprogram;
  *
  * @author hussa
  */
+//enum class that to define the type of the files as we can add more in futuer 
 public enum OutputType {
     CSV,
     TXT
