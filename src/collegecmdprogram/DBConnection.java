@@ -39,7 +39,7 @@ public class DBConnection {
                 int studentsNum = rs.getInt("number_of_students_enrolled");
                 String lecturer = rs.getString("lecturer_name");
                 String roomType = rs.getString("room_or_location");
-                coursesList.add(new Courses(moduleId,module, inprogramm, studentsNum, lecturer, roomType));
+                coursesList.add(new Courses(moduleId, module, inprogramm, studentsNum, lecturer, roomType));
 
             }
         }
@@ -106,13 +106,27 @@ public class DBConnection {
         }
 
     }
-        public void addToStudent(Student stdnt) {
+
+    public void addToStudent(Student stdnt) {
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             Statement stmt = conn.createStatement();
             stmt.execute("USE CourseManagementSystem;");
             stmt.execute(String.format("INSERT INTO Student(student_id,student_name,programme,student_status,grade) VALUES('%s','%s','%s','%s',%d);",
                     stdnt.getStudentId(), stdnt.getName(), stdnt.getStudentProgramme(), stdnt.getStudentStatus(), stdnt.getStudentGrade()));
+        } catch (SQLException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void addToLecturer(Lecturers lectr) {
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            Statement stmt = conn.createStatement();
+            stmt.execute("USE CourseManagementSystem;");
+            stmt.execute(String.format("INSERT INTO Lectrer(lecturer_id,lecturer_name,lecturer_role,semester_module,number_of_students_enrolled,lecturer_skills) VALUES('%s','%s','%s','%s',%d,'%s');",
+                    lectr.getLecturerId(), lectr.getLectureName(), lectr.getLectureRoll(), lectr.getModuleInSemester(), lectr.getStudentEnrolledNum(), lectr.getLectureSkills()));
         } catch (SQLException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }

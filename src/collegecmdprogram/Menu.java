@@ -463,6 +463,19 @@ public class Menu {
                     int studentGrade = sc.nextInt();
                     db.addToStudent(new Student(studentID, studentName, studentProgramme, studentStatus, studentGrade));
                 case 3:
+                    System.out.println("Enter The Lecturer ID.");
+                    String lecturerID = sc.next();
+                    System.out.println("Enter The Lecturer Name.");
+                    String lecturerName1 = sc.next();
+                    System.out.println("Enter The lecturer Teaching Role.");
+                    String lecturerRole = sc.next();
+                    System.out.println("What Is The Modules In This Semester?.");
+                    String semesterModules = sc.next();
+                    System.out.println("How Many Students Enrolled With This Lecturer?.");
+                    int lecturerStudentNum = sc.nextInt();
+                    System.out.println("Enter The Lecturer Skills.");
+                    String LecturerSkills = sc.next();
+                    db.addToLecturer(new Lecturers(lecturerID, lecturerName1, lecturerRole, semesterModules, lecturerStudentNum, LecturerSkills));
                 case 4:
                     return;
 
