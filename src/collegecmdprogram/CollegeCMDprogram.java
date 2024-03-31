@@ -14,13 +14,14 @@ public class CollegeCMDprogram {
 
     /**
      * @param args the command line arguments
+     * @throws java.sql.SQLException
      */
     public static void main(String[] args) throws SQLException {
         /*
-        when the programe start it will ask for the admin username and passwor
+        when the programe start it will ask for the admin username and password
         then the admin menu will display
-        as start we should create users admin or office or lecturer as when the program start the array of users will be empty
-        then when creating users they can put login credentials and the other functions of the programe will run
+        as start we should create users office or lecturer as when the program start the array of users will be empty
+        then when creating users press exit to go back to main log in then they can put login credentials and the other functions of the programe will run
         Note: we creating users in the begining is importand as if there is no users the program will display error that user not exist and won't let other menus to be displaied.
         
         

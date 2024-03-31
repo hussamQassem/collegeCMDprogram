@@ -1,8 +1,10 @@
+package collegecmdprogram;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package collegecmdprogram;
+
 
 /**
  *
@@ -10,11 +12,11 @@ package collegecmdprogram;
  */
 public class Student {
 
-    private String studentId;
-    private String name;
-    private String studentProgramme;
-    private String studentStatus;
-    private int studentGrade;
+    String studentId;
+    String name;
+    String studentProgramme;
+    String studentStatus;
+    int studentGrade;
 
     public Student(String studentId, String name, String studentProgramme, String studentStatus, int studentGrade) {
         this.studentId = studentId;
@@ -43,5 +45,4 @@ public class Student {
     public int getStudentGrade() {
         return studentGrade;
     }
-
 }

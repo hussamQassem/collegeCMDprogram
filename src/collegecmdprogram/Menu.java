@@ -1,8 +1,10 @@
+package collegecmdprogram;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package collegecmdprogram;
+
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -23,7 +25,7 @@ public class Menu {
     private User loggedUser;
     private ArrayList<User> users = new ArrayList();
     Scanner sc = new Scanner(System.in);
-    Courses course = new Courses("", "", "", 0, "", "");
+
     int option;
 
     public Menu() {
@@ -50,15 +52,15 @@ public class Menu {
                         }
                     }
                 }
-                System.out.println("The user " + username + " doesn't exits.");
+                //System.out.println("The user " + username + " doesn't exits.");
             }
 
             if (loggedUser.getRole() == UserRole.ADMIN) {
-
+                adminMenu();
             } else if (loggedUser.getRole() == UserRole.OFFICE) {
-
+                officeMenu();
             } else {
-
+                lecturerMenu();
             }
 
             loggedUser = null;
@@ -157,6 +159,7 @@ public class Menu {
                     loggedUser.changeUsernamePassword(changeUsername, changePassword);
                     break;
                 case 6:
+                    return;
                 default:
                     System.out.println("Invalid option, please try again.");
                     break;
@@ -164,6 +167,70 @@ public class Menu {
             }
 
         }
+    }
+
+    public void lecturerMenu() throws SQLException {
+        while (true) {
+            System.out.println("1- Generate Lecturer Report");
+            System.out.println("2- Change Username And Password");
+            System.out.println("3- generate New Lecturer Report.");
+            System.out.println("4- Exit");
+            option = sc.nextInt();
+
+            switch (option) {
+
+                case 1:
+                    System.out.println("1- Save To TXT File");
+                    System.out.println("2- Save To CSV File");
+                    System.out.println("3- Display On Console");
+                    System.out.println("4- Exit");
+
+                    int reportOption = sc.nextInt();
+                    if (reportOption == 1) {
+                        loggedUser.generateLecturerReport(OutputType.TXT);
+                        System.out.println("TXT File Saved");
+                    } else if (reportOption == 2) {
+                        loggedUser.generateLecturerReport(OutputType.CSV);
+                        System.out.println("CSV File Saved");
+                    } else if (reportOption == 3) {
+                        displayLecturerOnConsole();
+                    } else {
+                        System.out.println("Eixt");
+                    }
+                    break;
+                case 2:
+                    System.out.println(" Change Lecturer Username");
+                    String changeUsername = sc.next();
+                    System.out.println("Change Lecturer Password");
+                    String changePassword = sc.next();
+                    loggedUser.changeUsernamePassword(changeUsername, changePassword);
+                    break;
+                case 3:
+                    System.out.println("Enter The Lecturer ID.");
+                    String lecturerID = sc.next();
+                    System.out.println("Enter The Lecturer Name.");
+                    String lecturerName1 = sc.next();
+                    System.out.println("Enter The lecturer Teaching Role.");
+                    String lecturerRole = sc.next();
+                    System.out.println("What Is The Modules In This Semester?.");
+                    String semesterModules = sc.next();
+                    System.out.println("How Many Students Enrolled With This Lecturer?.");
+                    int lecturerStudentNum = sc.nextInt();
+                    System.out.println("Enter The Lecturer Skills.");
+                    String LecturerSkills = sc.next();
+                    db.addToLecturer(new Lecturers(lecturerID, lecturerName1, lecturerRole, semesterModules, lecturerStudentNum, LecturerSkills));
+
+                    break;
+                case 4:
+                    return;
+                default:
+                    System.out.println("Invalid option, please try again.");
+                    break;
+
+            }
+
+        }
+
     }
 
     public void saveTypeTo(int reportType) throws SQLException {
@@ -186,7 +253,7 @@ public class Menu {
                         break;
                     case 3:
                         displayCoursesOnConsole();
-
+                        System.out.println("Dispaly On Console");
                         break;
                     case 4:
                         System.out.println("Exit");
@@ -206,8 +273,8 @@ public class Menu {
                         System.out.println("CSV File Saved");
                         break;
                     case 3:
-
                         displayStudentOnConsole();
+                        System.out.println("Dispaly On Console");
                         break;
                     case 4:
                         System.out.println("Exit");
@@ -227,8 +294,8 @@ public class Menu {
                         System.out.println("CSV File Saved");
                         break;
                     case 3:
-
                         displayLecturerOnConsole();
+                        System.out.println("Dispaly On Console");
                         break;
                     case 4:
                         System.out.println("Exit");
@@ -240,52 +307,6 @@ public class Menu {
             }
 
         }
-    }
-
-    public void lecturerMenu() throws SQLException {
-        while (true) {
-            System.out.println("1- Generate Lecturer Report");
-            System.out.println("2- Change Username And Password");
-            System.out.println("3- Exit");
-            option = sc.nextInt();
-
-            switch (option) {
-
-                case 1:
-                    System.out.println("1- Save To TXT File");
-                    System.out.println("2- Save To CSV File");
-                    System.out.println("3- Display On Console");
-
-                    int reportOption = sc.nextInt();
-                    if (reportOption == 1) {
-                        loggedUser.generateLecturerReport(OutputType.TXT);
-                        System.out.println("TXT File Saved");
-                    } else if (reportOption == 2) {
-                        loggedUser.generateLecturerReport(OutputType.CSV);
-                        System.out.println("CSV File Saved");
-                    } else if (reportOption == 3) {
-                        System.out.println("Dispaly On Console");
-                    } else {
-                        System.out.println("Please Enter Valid Option");
-                    }
-                    break;
-                case 2:
-                    System.out.println(" Change Lecturer Username");
-                    String changeUsername = sc.next();
-                    System.out.println("Change Lecturer Password");
-                    String changePassword = sc.next();
-                    loggedUser.changeUsernamePassword(changeUsername, changePassword);
-                    break;
-                case 3:
-                    return;
-                default:
-                    System.out.println("Invalid option, please try again.");
-                    break;
-
-            }
-
-        }
-
     }
 
     public void displayStudentOnConsole() {
@@ -443,11 +464,11 @@ public class Menu {
                     String moduleName = sc.next();
                     System.out.println("Enter The programme Name.");
                     String courseProgramme = sc.next();
-                    System.out.println("How Many Students Enrolled");
+                    System.out.println("How Many Students Enrolled.");
                     int studentsEnrolled = sc.nextInt();
                     System.out.println("Enter The Lecturer Name.");
                     String lecturerName = sc.next();
-                    System.out.println("Enter Room Or Location");
+                    System.out.println("Enter Room Or Location.");
                     String roomOrLocation = sc.next();
                     db.addToCourses(new Courses(moduleID, moduleName, courseProgramme, studentsEnrolled, lecturerName, roomOrLocation));
                 case 2:
@@ -462,6 +483,7 @@ public class Menu {
                     System.out.println("Enter The Student Grade.");
                     int studentGrade = sc.nextInt();
                     db.addToStudent(new Student(studentID, studentName, studentProgramme, studentStatus, studentGrade));
+
                 case 3:
                     System.out.println("Enter The Lecturer ID.");
                     String lecturerID = sc.next();
@@ -483,4 +505,5 @@ public class Menu {
         }
 
     }
+
 }

@@ -4,6 +4,7 @@
  */
 package collegecmdprogram;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -20,9 +21,12 @@ import java.util.logging.Logger;
  */
 public class DBConnection {
 
-    private final String DB_URL = "jdbc:mysql://localhost/?user=pooa2024&password=pooa2024";
-    private final String USER = "pooa2024";
-    private final String PASSWORD = "pooa2024";
+    private final String DB_URL = "jdbc:mysql://localhost/?user=root&password=1989";
+
+    private final String USER = "root";
+    private final String PASSWORD = "1989";
+
+
 
     public ArrayList<Courses> getCourseArray() throws SQLException {
 
@@ -33,13 +37,13 @@ public class DBConnection {
             ResultSet rs = PreparedStatement.executeQuery();
             coursesList = new ArrayList<>();
             while (rs.next()) {
-                String moduleId = rs.getString("module_id");
+                String moduleId=rs.getString("module_id");
                 String module = rs.getString("module_name");
                 String inprogramm = rs.getString("programme");
                 int studentsNum = rs.getInt("number_of_students_enrolled");
                 String lecturer = rs.getString("lecturer_name");
                 String roomType = rs.getString("room_or_location");
-                coursesList.add(new Courses(moduleId, module, inprogramm, studentsNum, lecturer, roomType));
+                coursesList.add(new Courses(moduleId,module, inprogramm, studentsNum, lecturer, roomType));
 
             }
         }
@@ -93,14 +97,37 @@ public class DBConnection {
 
     }
 
+    public ArrayList<Lecturers> getLecturerArray(String Le) throws SQLException {
+
+        ArrayList<Lecturers> lectureList;
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
+            PreparedStatement PreparedStatement = conn.prepareStatement("SELECT * FROM Lecturers ");
+            PreparedStatement.execute("USE CourseManagementSystem;");
+            ResultSet rs = PreparedStatement.executeQuery();
+            lectureList = new ArrayList<>();
+            while (rs.next()) {
+                String lecturerId = rs.getString("lecturer_id");
+                String lectureName = rs.getString("lecturer_name");
+                String lectureRoll = rs.getString("lecturer_role");
+                String moduleInSemester = rs.getString("semester_module");
+                int studentEnrolledNum = rs.getInt("number_of_students_enrolled");
+                String lectureSkills = rs.getString("lecturer_skills");
+                lectureList.add(new Lecturers(lecturerId, lectureName, lectureRoll, moduleInSemester, studentEnrolledNum, lectureSkills));
+
+            }
+        }
+        return lectureList;
+
+    }
+
     public void addToCourses(Courses cors) {
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             Statement stmt = conn.createStatement();
             stmt.execute("USE CourseManagementSystem;");
             stmt.execute(String.format("INSERT INTO Courses(module_id,module_name,programme,number_of_students_enrolled,lecturer_name,room_or_location) VALUES('%s','%s','%s',%d,'%s','%s');",
-                    cors.getModuleId(), cors.getModule(), cors.getInprogramm(), cors.getStudentsNum(), cors.getLecturer(), cors.getRoomType()));
-
+                  cors.getModuleId(), cors.getModule(), cors.getInprogramm(), cors.getStudentsNum(), cors.getLecturer(), cors.getRoomType()));
+            
         } catch (SQLException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -125,11 +152,13 @@ public class DBConnection {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             Statement stmt = conn.createStatement();
             stmt.execute("USE CourseManagementSystem;");
-            stmt.execute(String.format("INSERT INTO Lectrer(lecturer_id,lecturer_name,lecturer_role,semester_module,number_of_students_enrolled,lecturer_skills) VALUES('%s','%s','%s','%s',%d,'%s');",
+            stmt.execute(String.format("INSERT INTO Lecturers(lecturer_id,lecturer_name,lecturer_role,semester_module,number_of_students_enrolled,lecturer_skills) VALUES('%s','%s','%s','%s',%d,'%s');",
                     lectr.getLecturerId(), lectr.getLectureName(), lectr.getLectureRoll(), lectr.getModuleInSemester(), lectr.getStudentEnrolledNum(), lectr.getLectureSkills()));
         } catch (SQLException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
+
+
 }
