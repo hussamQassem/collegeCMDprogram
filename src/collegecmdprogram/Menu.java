@@ -187,7 +187,6 @@ public class Menu {
                     case 3:
                         displayCoursesOnConsole();
 
-                        
                         break;
                     case 4:
                         System.out.println("Exit");
@@ -288,7 +287,8 @@ public class Menu {
         }
 
     }
-        public void displayStudentOnConsole() {
+
+    public void displayStudentOnConsole() {
         try {
             ArrayList<Student> studentsTable = db.getStudentArray();
 
@@ -335,6 +335,7 @@ public class Menu {
         }
 
     }
+
     public void writeStudentsTo(OutputType outputType) throws SQLException {
 
         try {
@@ -364,7 +365,8 @@ public class Menu {
         }
 
     }
-        public void writeCourcesTo(OutputType outputType) throws SQLException {
+
+    public void writeCourcesTo(OutputType outputType) throws SQLException {
 
         try {
             BufferedWriter wr;
@@ -392,7 +394,8 @@ public class Menu {
         }
 
     }
-            public void writeLecturersTo(OutputType outputType) throws SQLException {
+
+    public void writeLecturersTo(OutputType outputType) throws SQLException {
         try {
             BufferedWriter wr;
             if (outputType == OutputType.CSV) {
@@ -422,7 +425,8 @@ public class Menu {
         }
 
     }
-                public void addToreport() throws SQLException {
+
+    public void addToreport() throws SQLException {
         while (true) {
 
             System.out.println("Please choose the report to generait more data");
@@ -445,8 +449,19 @@ public class Menu {
                     String lecturerName = sc.next();
                     System.out.println("Enter Room Or Location");
                     String roomOrLocation = sc.next();
-                    
+                    db.addToCourses(new Courses(moduleID, moduleName, courseProgramme, studentsEnrolled, lecturerName, roomOrLocation));
                 case 2:
+                    System.out.println("Enter The Student ID.");
+                    String studentID = sc.next();
+                    System.out.println("Enter The Student Name.");
+                    String studentName = sc.next();
+                    System.out.println("Enter The Student programme Name.");
+                    String studentProgramme = sc.next();
+                    System.out.println("Enter The Student Status.");
+                    String studentStatus = sc.next();
+                    System.out.println("Enter The Student Grade.");
+                    int studentGrade = sc.nextInt();
+                    db.addToStudent(new Student(studentID, studentName, studentProgramme, studentStatus, studentGrade));
                 case 3:
                 case 4:
                     return;
