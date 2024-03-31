@@ -357,7 +357,7 @@ public class Menu {
 
     }
 
-
+// method will allow office users to add to the tables 
     public void addToreport() throws SQLException {
         while (true) {
 
