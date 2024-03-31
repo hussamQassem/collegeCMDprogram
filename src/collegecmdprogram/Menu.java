@@ -126,8 +126,9 @@ public class Menu {
             System.out.println("1- Generate Courses Report");
             System.out.println("2- Generate Student Report");
             System.out.println("3- Generate Lecturer Report");
-            System.out.println("4- Change Username And Password");
-            System.out.println("5- Exit");
+            System.out.println("4- Generate New Report");
+            System.out.println("5- Change Username And Password");
+            System.out.println("6- Exit");
             option = sc.nextInt();
             int reportType;
 
@@ -146,14 +147,15 @@ public class Menu {
                     saveTypeTo(reportType);
                     break;
                 case 4:
+                    addToreport();
+                case 5:
                     System.out.println(" Change Office Username");
                     String changeUsername = sc.next();
                     System.out.println("Change Office Password");
                     String changePassword = sc.next();
                     loggedUser.changeUsernamePassword(changeUsername, changePassword);
                     break;
-                case 5:
-                    return;
+                case 6:
                 default:
                     System.out.println("Invalid option, please try again.");
                     break;
